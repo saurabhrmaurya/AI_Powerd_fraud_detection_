@@ -1,0 +1,51 @@
+{% extends './base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow border-0 animate__animated animate__fadeInDown">
+                <div class="card-body p-5">
+                    <h3 class="text-center mb-4 animate__animated animate__zoomIn">OTP Verification</h3>
+
+
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="form-floating mb-4">
+                            <input type="text" name="otp" class="form-control text-center fw-bold fs-4" placeholder="Enter OTP" maxlength="6" pattern="\d{6}" required>
+                            <label>Enter the 6-digit OTP sent to your email</label>
+                        </div>
+
+                        <div class="mb-3 text-center text-muted" id="countdown">OTP valid for: <span id="timer">02:00</span></div>
+
+                        <button type="submit" class="btn btn-success w-100 animate__animated animate__pulse animate__infinite">Verify OTP</button>
+
+                        <div class="text-center mt-3">
+                            Didn't receive it? <a href="{% url 'register' %}">Try Again</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Countdown Timer Script -->
+<script>
+    let duration = 120; // seconds
+    let timerDisplay = document.getElementById('timer');
+
+    const countdown = setInterval(() => {
+        let minutes = Math.floor(duration / 60);
+        let seconds = duration % 60;
+
+        timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+        if (--duration < 0) {
+            clearInterval(countdown);
+            timerDisplay.textContent = "Expired";
+            alert("OTP has expired. Please request a new one.");
+            window.location.href = "{% url 'register' %}";
+        }
+    }, 1000);
+</script>
+{% endblock %}

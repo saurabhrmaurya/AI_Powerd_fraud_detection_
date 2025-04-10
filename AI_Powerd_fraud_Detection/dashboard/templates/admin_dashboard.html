@@ -1,0 +1,12 @@
+
+{% block title %}Admin Dashboard{% endblock %}
+
+<h2>Welcome,  {{ request.user.username }}</h2>
+<ul>
+  <li>Manage Users</li>
+  <li>View Transactions</li>
+  <li>Credit Risk Analysis</li>
+  <li>Market Forecasting</li>
+</ul>
+
+<a href="{% url 'logout' %}">logout</a><br>

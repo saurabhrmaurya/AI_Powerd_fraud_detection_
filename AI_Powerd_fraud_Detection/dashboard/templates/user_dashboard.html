@@ -1,0 +1,4 @@
+{% block title %}User Dashboard{% endblock %}
+<h2>Welcome, {{ request.user.first_name }}</h2>
+<p>Track your financial data, investments, credit score, and more!</p>
+<a href="{% url 'logout' %}">logout</a><br>

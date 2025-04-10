@@ -1,0 +1,65 @@
+{% extends './base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0">
+                <div class="card-body p-5">
+                    <h3 class="text-center mb-4">Create an Account</h3>
+
+                    {% if messages %}
+                        <div class="alert alert-danger">
+                            {% for message in messages %}
+                                {{ message }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="form-floating mb-3">
+                            <input type="text" name="name" class="form-control" placeholder="Full Name" required>
+                            <label>Full Name</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="tel" name="mobile" class="form-control" placeholder="Mobile Number" required pattern="\d{10}">
+                            <label>Mobile Number</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="email" name="email" class="form-control" placeholder="Email" required>
+                            <label>Email</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <textarea name="address" class="form-control" placeholder="Address" style="height: 100px;" required></textarea>
+                            <label>Address</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" name="aadhar" class="form-control" placeholder="Aadhar Number" required pattern="\d{12}">
+                            <label>Aadhar Number</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="password" name="password" class="form-control" placeholder="Password" required>
+                            <label>Password</label>
+                        </div>
+
+                        <div class="form-floating mb-4">
+                            <input type="password" name="confirm_password" class="form-control" placeholder="Confirm Password" required>
+                            <label>Confirm Password</label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">Send OTP</button>
+                        <div class="text-center mt-3">
+                            Already have an account? <a href="{% url 'login' %}">Login</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
